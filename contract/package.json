@@ -1,0 +1,20 @@
+{
+  "name": "tipme",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "yarn build:contract:debug",
+    "build:contract": "asb",
+    "build:contract:debug": "asb --target debug",
+    "clean": "rm -rf ./build",
+    "test": "yarn test:unit",
+    "test:unit": "asp --verbose -f unit.spec",
+    "test:simulate:vm": "yarn near-vm",
+    "test:simulate:vm:greeting": "yarn test:simulate:vm --wasm-file build/debug/tipme.wasm --method-name sayMyName"
+  },
+  "devDependencies": {
+    "near-cli": "^3.2.0",
+    "near-sdk-as": "^3.2.3"
+  }
+}
