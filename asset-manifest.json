@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/near-tip-me/static/css/main.79fea7ff.chunk.css",
+    "main.js": "/near-tip-me/static/js/main.5e4d3c1d.chunk.js",
+    "main.js.map": "/near-tip-me/static/js/main.5e4d3c1d.chunk.js.map",
+    "runtime-main.js": "/near-tip-me/static/js/runtime-main.bed0cc17.js",
+    "runtime-main.js.map": "/near-tip-me/static/js/runtime-main.bed0cc17.js.map",
+    "static/css/2.4b31920b.chunk.css": "/near-tip-me/static/css/2.4b31920b.chunk.css",
+    "static/js/2.46e94bc3.chunk.js": "/near-tip-me/static/js/2.46e94bc3.chunk.js",
+    "static/js/2.46e94bc3.chunk.js.map": "/near-tip-me/static/js/2.46e94bc3.chunk.js.map",
+    "static/js/3.654b3f63.chunk.js": "/near-tip-me/static/js/3.654b3f63.chunk.js",
+    "static/js/3.654b3f63.chunk.js.map": "/near-tip-me/static/js/3.654b3f63.chunk.js.map",
+    "index.html": "/near-tip-me/index.html",
+    "static/css/2.4b31920b.chunk.css.map": "/near-tip-me/static/css/2.4b31920b.chunk.css.map",
+    "static/css/main.79fea7ff.chunk.css.map": "/near-tip-me/static/css/main.79fea7ff.chunk.css.map",
+    "static/js/2.46e94bc3.chunk.js.LICENSE.txt": "/near-tip-me/static/js/2.46e94bc3.chunk.js.LICENSE.txt",
+    "static/media/bootstrap-icons.css": "/near-tip-me/static/media/bootstrap-icons.c1d7432e.woff",
+    "static/media/cover.3ed020af.png": "/near-tip-me/static/media/cover.3ed020af.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.bed0cc17.js",
+    "static/css/2.4b31920b.chunk.css",
+    "static/js/2.46e94bc3.chunk.js",
+    "static/css/main.79fea7ff.chunk.css",
+    "static/js/main.5e4d3c1d.chunk.js"
+  ]
+}
