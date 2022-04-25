@@ -61,7 +61,7 @@ Each account on NEAR can have at most one contract deployed to it. If you've alr
 
 Modify the line in `src/config.js` that sets the account name of the contract. Set it to the account id you used above.
 
-    const CONTRACT_NAME = process.env.CONTRACT_NAME || 'nearforum.YOUR-NAME.testnet'
+    const CONTRACT_NAME = process.env.CONTRACT_NAME || 'tipme.YOUR-NAME.testnet'
 
 IMPOTANT: If you deploy contract to testnet server (accountId be like xxx.testnet), you should remove `process.env.NODE_ENV` at `src/utils.js`:
 
