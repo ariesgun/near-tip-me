@@ -1,70 +1,93 @@
-# Getting Started with Create React App
+NEAR Tip Me - a web3 tip me application based on NEAR platform
+==============================================================
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Overview
+NEAR TipMe is a tip-me project on NEAR platform. Evveryone can create an account ready to be tipped, tip other accounts, and withdraw tips from other accounts.
 
-## Available Scripts
+ - The contract code lives in the `/contract/assembly` folder.
+ - The web app made by ReactJS framework
 
-In the project directory, you can run:
 
-### `npm start`
+"NEAR Development 101" Challenge : [https://dacade.org/communities/near/courses/near-101/]
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+ - [Demo Website.]
+ - You can signup here to learn and earn crypto: https://dacade.org/signup?invite=xenosgeck
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+# Technology Stacks
 
-### `npm test`
+ - `ReactJS`
+ - `Near SDK (near-sdk-as)`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Screen
 
-### `npm run build`
+![login page](images/home.png)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Install
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. Prerequisites: Make sure you have Node.js ≥ 12 installed (https://nodejs.org), then use it to install [yarn]: npm install --global yarn (or just npm i -g yarn)
+2. Run the local development server: yarn && yarn dev (see package.json for a full list of scripts you can run with yarn)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+# Build and Deploy
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Every smart contract in NEAR has its [own associated account][NEAR accounts]. When you run `yarn dev`, your smart contract gets deployed to the live NEAR TestNet with a throwaway account. When you're ready to make it permanent, here's how.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Step 0: Install near-cli (optional)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+[near-cli] is a command line interface (CLI) for interacting with the NEAR blockchain. It was installed to the local `node_modules` folder when you ran `yarn install`, but for best ergonomics you may want to install it globally:
 
-## Learn More
+    npm install --global near-cli
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Or, if you'd rather use the locally-installed version, you can prefix all `near` commands with `npx`
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Ensure that it's installed with `near --version` (or `npx near --version`)
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Step 1: Create an account for the contract
 
-### Analyzing the Bundle Size
+Each account on NEAR can have at most one contract deployed to it. If you've already created an account such as `your-name.testnet`, you can deploy your contract to `tipme.your-name.testnet`. Assuming you've already created an account on [NEAR Wallet], here's how to create `tipme.your-name.testnet`:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+1. Authorize NEAR CLI, following the commands it gives you:
 
-### Making a Progressive Web App
+      near login
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+2. Create a subaccount (replace `YOUR-NAME` below with your actual account name):
 
-### Advanced Configuration
+      near create-account tipme.YOUR-NAME.testnet --masterAccount YOUR-NAME.testnet
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
+## Step 2: set contract name in code
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Modify the line in `src/config.js` that sets the account name of the contract. Set it to the account id you used above.
 
-### `npm run build` fails to minify
+    const CONTRACT_NAME = process.env.CONTRACT_NAME || 'nearforum.YOUR-NAME.testnet'
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+IMPOTANT: If you deploy contract to testnet server (accountId be like xxx.testnet), you should remove `process.env.NODE_ENV` at `src/utils.js`:
+
+    const nearConfig = getConfig("development");
+
+because When you run `npm start`, `process.env.NODE_ENV` is always equal to 'development', when you run `npm test` it is always equal to 'test', and when you run `npm run build` to make a production bundle, it is always equal to 'production'. So if `nearConfig` is production config, all url are mainnet server, not testnet server that you deployed your contract! You maybe get this error:
+`https://stackoverflow.com/questions/69952774/reactjs-not-call-method-from-smart-contract-near-on-product-testnet-does-not`
+
+## Step 3: deploy!
+
+One command:
+
+    npm run deploy
+
+As you can see in `package.json`, this does two things:
+
+1. builds & deploys smart contract to NEAR TestNet
+2. builds & deploys frontend code to GitHub using [gh-pages]. This will only work if the project already has a repository set up on GitHub. Feel free to modify the `deploy` script in `package.json` to deploy elsewhere.
+
+
+  [React]: https://reactjs.org/
+  [create-near-app]: https://github.com/near/create-near-app
+  [Node.js]: https://nodejs.org/en/download/package-manager/
+  [jest]: https://jestjs.io/
+  [NEAR accounts]: https://docs.near.org/docs/concepts/account
+  [NEAR Wallet]: https://wallet.testnet.near.org/
+  [near-cli]: https://github.com/near/near-cli
+  [gh-pages]: https://github.com/tschaub/gh-pages
+  [Demo Website.]: https://namnp1521.github.io/NEARForum/
