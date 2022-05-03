@@ -10,7 +10,7 @@ NEAR TipMe is a tip-me project on NEAR platform. Evveryone can create an account
 
 "NEAR Development 101" Challenge : [https://dacade.org/communities/near/courses/near-101/]
 
- - [Demo Website.]
+ - [Demo website](https://ariesgun.github.io/near-tip-me/)
  - You can signup here to learn and earn crypto: https://dacade.org/signup?invite=xenosgeck
 
 # Technology Stacks
